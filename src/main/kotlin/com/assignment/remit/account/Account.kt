@@ -2,13 +2,16 @@ package com.assignment.remit.account
 
 import com.assignment.remit.account.model.AccountStatus
 import com.assignment.remit.global.BaseEntity
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
+import com.assignment.remit.global.PermissionDeniedException
+import com.assignment.remit.user.User
+import jakarta.persistence.*
 import java.math.BigDecimal
 
 @Entity
 class Account(
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    val user: User,
     balance: BigDecimal = BigDecimal.ZERO,
     depositLimit: BigDecimal,
     status: AccountStatus = AccountStatus.ACTIVE
@@ -41,10 +44,23 @@ class Account(
         }
     }
 
+    private fun authorityCheck(userId: Long) {
+        if (userId != user.id) {
+            throw PermissionDeniedException()
+        }
+    }
+
     fun deposit(amount: BigDecimal) {
         availableCheck()
         depositAvailableCheck(amount)
         balance += amount
+    }
+
+    fun withdraw(userId: Long, amount: BigDecimal) {
+        authorityCheck(userId)
+        availableCheck()
+        withdrawAvailableCheck(amount)
+        balance -= amount
     }
 
     fun toInActive() {
