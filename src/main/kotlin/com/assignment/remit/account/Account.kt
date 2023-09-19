@@ -12,8 +12,8 @@ class Account(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     val user: User,
-    balance: BigDecimal = BigDecimal.ZERO,
     depositLimit: BigDecimal,
+    balance: BigDecimal = BigDecimal.ZERO,
     status: AccountStatus = AccountStatus.ACTIVE
 ): BaseEntity<Account>() {
     var balance = balance

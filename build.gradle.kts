@@ -29,6 +29,10 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-testcontainers")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:mysql")
+    // kotest
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:5.5.5")
+    testImplementation("io.kotest:kotest-assertions-core:5.5.5")
+    testImplementation("io.mockk:mockk:1.13.4")
 }
 
 tasks.withType<KotlinCompile> {
