@@ -1,5 +1,8 @@
 package com.assignment.remit.transaction
 
+import com.assignment.remit.account.dto.DepositRequest
+import com.assignment.remit.account.dto.TransferRequest
+import com.assignment.remit.account.dto.WithdrawRequest
 import com.assignment.remit.transaction.model.TransactionFilterStatus
 import com.assignment.remit.transaction.model.TransactionStatus
 import com.assignment.remit.transaction.model.TransactionType
@@ -20,6 +23,44 @@ data class TransactionRequest(
     var memo: String? = null
 ) {
     var status = TransactionStatus.PENDING
+
+    companion object {
+        fun fromDeposit(depositRequest: DepositRequest) =
+            with(depositRequest) {
+                TransactionRequest(
+                    uuid,
+                    depositAccountId,
+                    null,
+                    amount,
+                    type,
+                    memo
+                )
+            }
+
+        fun fromWithdraw(withdrawRequest: WithdrawRequest) =
+            with(withdrawRequest) {
+                TransactionRequest(
+                    uuid,
+                    null,
+                    withdrawAccountId,
+                    amount,
+                    type,
+                    memo
+                )
+            }
+
+        fun fromTransfer(transferRequest: TransferRequest) =
+            with(transferRequest) {
+                TransactionRequest(
+                    uuid,
+                    depositAccountId,
+                    withdrawAccountId,
+                    amount,
+                    type,
+                    memo
+                )
+            }
+    }
 }
 
 data class TransactionResponse(
