@@ -47,16 +47,18 @@ class ExceptionHandler: ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(PermissionDeniedException::class)
     fun handlePermissionDeniedException(exception: RuntimeException): ResponseEntity<ErrorResponse> {
+        logger.warn(exception.message)
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponse(exception.message))
     }
 
     @ExceptionHandler(EntityNotFoundException::class)
     fun handleEntityNotfoundException(exception: RuntimeException): ResponseEntity<ErrorResponse> {
+        logger.warn(exception.message)
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(exception.message))
     }
 
     @ExceptionHandler(CustomException::class)
-    fun handleGlobalException(exception: Exception): ResponseEntity<ErrorResponse> {
+    fun handleGlobalException(exception: RuntimeException): ResponseEntity<ErrorResponse> {
         logger.warn(exception.message)
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponse(exception.message))
     }
