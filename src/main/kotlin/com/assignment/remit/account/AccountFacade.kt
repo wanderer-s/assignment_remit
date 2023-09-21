@@ -2,6 +2,7 @@ package com.assignment.remit.account
 
 import com.assignment.remit.account.dto.*
 import com.assignment.remit.user.UserService
+import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
@@ -27,5 +28,13 @@ class AccountFacade(
 
     fun transfer(request: TransferRequest) {
         accountService.transfer(request)
+    }
+
+    fun getAccount(accountId: Long, userId: Long): AccountResponse {
+        val foundAccount = accountService.get(accountId)
+        if (foundAccount.user.id != userId) {
+            throw EntityNotFoundException("계좌를 찾을 수 없습니다")
+        }
+        return AccountResponse.of(foundAccount)
     }
 }

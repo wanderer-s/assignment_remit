@@ -3,7 +3,6 @@ package com.assignment.remit.account.dto
 import com.assignment.remit.account.Account
 import com.assignment.remit.account.model.AccountStatus
 import com.assignment.remit.transaction.model.TransactionType
-import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
 import java.math.BigDecimal
 import java.util.*
@@ -59,7 +58,7 @@ data class WithdrawRequest(
 }
 
 data class TransferRequest(
-    @field:NotNull
+    @field:Positive(message = "올바른 형식이어야 합니다")
     val depositAccountId: Long,
     @field:Positive
     val amount: BigDecimal,
