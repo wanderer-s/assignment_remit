@@ -2,7 +2,7 @@ package com.assignment.remit.account
 
 import com.assignment.remit.account.model.AccountStatus
 import com.assignment.remit.global.BaseEntity
-import com.assignment.remit.global.PermissionDeniedException
+import com.assignment.remit.global.exception.PermissionDeniedException
 import com.assignment.remit.user.User
 import jakarta.persistence.*
 import java.math.BigDecimal

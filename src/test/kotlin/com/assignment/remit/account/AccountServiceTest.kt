@@ -5,7 +5,7 @@ import com.assignment.remit.account.dto.TransferRequest
 import com.assignment.remit.account.dto.WithdrawRequest
 import com.assignment.remit.account.model.AccountStatus
 import com.assignment.remit.account.repository.AccountRepository
-import com.assignment.remit.global.PermissionDeniedException
+import com.assignment.remit.global.exception.PermissionDeniedException
 import com.assignment.remit.transaction.TransactionService
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.IsolationMode

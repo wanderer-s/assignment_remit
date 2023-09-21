@@ -1,7 +1,7 @@
 package com.assignment.remit.account
 
 import com.assignment.remit.account.model.AccountStatus
-import com.assignment.remit.global.PermissionDeniedException
+import com.assignment.remit.global.exception.PermissionDeniedException
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.FeatureSpec
 import io.kotest.matchers.shouldBe

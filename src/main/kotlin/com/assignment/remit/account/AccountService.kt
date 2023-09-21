@@ -4,7 +4,7 @@ import com.assignment.remit.account.dto.DepositRequest
 import com.assignment.remit.account.dto.TransferRequest
 import com.assignment.remit.account.dto.WithdrawRequest
 import com.assignment.remit.account.repository.AccountRepository
-import com.assignment.remit.global.CustomException
+import com.assignment.remit.global.exception.CustomException
 import com.assignment.remit.transaction.TransactionRequest
 import com.assignment.remit.transaction.TransactionService
 import com.assignment.remit.transaction.model.TransactionStatus
@@ -21,7 +21,7 @@ class AccountService(
     private val accountRepository: AccountRepository,
     private val transactionService: TransactionService
 ) {
-    private fun get(id: Long): Account {
+    fun get(id: Long): Account {
         return accountRepository.findByIdOrNull(id) ?: throw EntityNotFoundException("계좌를 찾을 수 없습니다")
     }
 

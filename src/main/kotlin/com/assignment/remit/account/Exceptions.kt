@@ -1,6 +1,6 @@
 package com.assignment.remit.account
 
-import com.assignment.remit.global.CustomException
+import com.assignment.remit.global.exception.CustomException
 
 
 sealed class AccountException(message: String): CustomException(message)
