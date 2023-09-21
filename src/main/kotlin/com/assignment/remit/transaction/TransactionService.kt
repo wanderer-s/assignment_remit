@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 class TransactionService(
     private val transactionRepository: TransactionRepository
 ) {
+    @Transactional(readOnly = true)
     fun findAllByFilter(filter: Filter, pagination: Pagination): List<TransactionResponse> {
         val transactions = transactionRepository.findAllByFilter(filter, pagination)
         return transactions.map { TransactionResponse.of(it)}

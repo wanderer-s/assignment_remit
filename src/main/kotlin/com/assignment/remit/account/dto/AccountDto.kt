@@ -1,5 +1,7 @@
 package com.assignment.remit.account.dto
 
+import com.assignment.remit.account.Account
+import com.assignment.remit.account.model.AccountStatus
 import com.assignment.remit.transaction.model.TransactionType
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Positive
@@ -67,4 +69,28 @@ data class TransferRequest(
     val type = TransactionType.TRANSFER
     var withdrawAccountId by Delegates.notNull<Long>()
     var userId by Delegates.notNull<Long>()
+}
+
+data class CreateAccountRequest(
+    @field:Positive
+    val depositLimit: BigDecimal
+) {
+    var userId by Delegates.notNull<Long>()
+}
+
+data class AccountResponse(
+    val id: Long,
+    val balance: BigDecimal,
+    val depositLimit: BigDecimal,
+    val status: AccountStatus
+) {
+    companion object {
+        fun of(account: Account) =
+            AccountResponse(
+                account.id,
+                account.balance,
+                account.depositLimit,
+                account.status
+            )
+    }
 }
